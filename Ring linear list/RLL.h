@@ -13,8 +13,8 @@ struct RLL
 };
 	RLL* Start(RLL*,int);
 	RLL* Add(RLL*, int);
-	void Del(RLL*);
-	void MoveUp(RLL*);
-	void MoveDown(RLL*);
-	void Search(RLL*, int);
+	RLL* Del(RLL*);
+	RLL* MoveUp(RLL*);
+	RLL* MoveDown(RLL*);
+	RLL* Search(RLL*, int);
 	void PrintAll(RLL*);
