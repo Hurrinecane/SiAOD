@@ -14,17 +14,14 @@ struct student
 	double average;
 };
 
-student list[length];
+student List[length];
 
 void GetList()
 {
 	FILE *f;
 
 	if (fopen_s(&f, "list.txt", "r") != 0)
-	{
-		fclose(f);
 		exit(1);
-	}
 
 	for (int i = 0; i < length; i++)
 	{
@@ -39,20 +36,20 @@ void GetList()
 				{
 					switch (c) {
 					case 0: //Фамилия
-						strcpy_s(list[i].lastname, tmpstr);
-						list[i].lastname[j] = {};
+						strcpy_s(List[i].lastname, tmpstr);
+						List[i].lastname[j] = {};
 						break;
 					case 1: //Зачетка
-						list[i].number = atoi(tmpstr);
+						List[i].number = atoi(tmpstr);
 						break;
 					case 2:
-						list[i].mat = atoi(tmpstr);
+						List[i].mat = atoi(tmpstr);
 						break;
 					case 3:
-						list[i].phys = atoi(tmpstr);
+						List[i].phys = atoi(tmpstr);
 						break;
 					case 4:
-						list[i].prog = atoi(tmpstr);
+						List[i].prog = atoi(tmpstr);
 						break;
 					}
 					break;
@@ -77,22 +74,22 @@ void PrintList()
 			switch (c)
 			{
 			case 0:
-				printf_s("%10s ", list[i].lastname);
+				printf_s("%10s ", List[i].lastname);
 				break;
 			case 1:
-				printf_s("%1d ", list[i].number);
+				printf_s("%1d ", List[i].number);
 				break;
 			case 2:
-				printf_s("%2d ", list[i].mat);
+				printf_s("%2d ", List[i].mat);
 				break;
 			case 3:
-				printf_s("%3d ", list[i].phys);
+				printf_s("%3d ", List[i].phys);
 				break;
 			case 4:
-				printf_s("%3d ", list[i].prog);
+				printf_s("%3d ", List[i].prog);
 				break;
 			case 5:
-				printf_s("%7.2lf\n", list[i].average);
+				printf_s("%7.2lf\n", List[i].average);
 				break;
 			}
 			c++;
@@ -115,25 +112,25 @@ void Sort(int choise)
 			switch (choise)
 			{
 			case 1:
-				if (strcmp(list[j + 1].lastname, list[j].lastname) < 0) check = true;
+				if (strcmp(List[j + 1].lastname, List[j].lastname) < 0) check = true;
 				break;
 			case 2:
-				if (list[j].mat > list[j + 1].mat) check = true;
+				if (List[j].mat > List[j + 1].mat) check = true;
 				break;
 			case 3:
-				if (list[j].phys > list[j + 1].phys) check = true;
+				if (List[j].phys > List[j + 1].phys) check = true;
 				break;
 			case 4:
-				if (list[j].prog > list[j + 1].prog) check = true;
+				if (List[j].prog > List[j + 1].prog) check = true;
 				break;
 			}
 
 			if (check)
 			{
 				flag = false;
-				tmp = list[j];
-				list[j] = list[j + 1];
-				list[j + 1] = tmp;
+				tmp = List[j];
+				List[j] = List[j + 1];
+				List[j + 1] = tmp;
 			}
 		}
 		if (flag)
@@ -151,7 +148,7 @@ int main()
 
 	for (int i = 0; i < length; i++)
 	{
-		list[i].average = (list[i].mat + list[i].phys + list[i].prog) / 3.0;
+		List[i].average = (List[i].mat + List[i].phys + List[i].prog) / 3.0;
 	}
 
 	char button = {};
