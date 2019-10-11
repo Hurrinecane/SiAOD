@@ -1,7 +1,7 @@
 #pragma once
 #include "RLL.h"
 
-RLL* Start(RLL*cur, int x)
+RLL* Start(RLL*cur, string x)
 {
 	cur = new(RLL);
 	cur->x = x;
@@ -9,7 +9,7 @@ RLL* Start(RLL*cur, int x)
 	return cur;
 }
 
-RLL* Add(RLL*cur, int x)
+RLL* Add(RLL*cur, string x)
 {
 	RLL*tmp = new(RLL);
 	tmp->x = x;
@@ -77,7 +77,7 @@ RLL* MoveDown(RLL*cur)
 	else return cur;
 }
 
-RLL* Search(RLL*cur, int x)
+RLL* Search(RLL*cur, string x)
 {
 	RLL* tmp = cur;
 	do

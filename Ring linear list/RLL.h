@@ -4,17 +4,18 @@
 using  std::cout;
 using  std::cin;
 using std::endl;
+using std::string;
 
 struct RLL
 {
-	int x;
+	string x;
 	RLL* next = nullptr;
 	RLL* prev = nullptr;
 };
-	RLL* Start(RLL*,int);
-	RLL* Add(RLL*, int);
+	RLL* Start(RLL*,string);
+	RLL* Add(RLL*, string);
 	RLL* Del(RLL*);
 	RLL* MoveUp(RLL*);
 	RLL* MoveDown(RLL*);
-	RLL* Search(RLL*, int);
+	RLL* Search(RLL*, string);
 	void PrintAll(RLL*);

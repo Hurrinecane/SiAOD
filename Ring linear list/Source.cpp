@@ -6,7 +6,7 @@
 int main()
 {
 	setlocale(LC_ALL, "");
-	RLL*list = {};
+	RLL* list = {};
 
 	bool start = true;
 	char button;
@@ -20,7 +20,7 @@ int main()
 			if (button == '1')
 			{
 				start = false;
-				int tmp;
+				string tmp;
 				system("cls");
 				cout << "Введите первый элемент: ";
 				cin >> tmp;
@@ -36,7 +36,7 @@ int main()
 			{
 			case '1':
 			{
-				int tmp;
+				std::string tmp;
 				cout << "Введите значение нового элемента: ";
 				cin >> tmp;
 				list = Add(list, tmp);
@@ -54,7 +54,7 @@ int main()
 				break;
 			case '5':
 			{
-				int tmp;
+				string tmp;
 				cout << "Введите значение искомого элемента: ";
 				cin >> tmp;
 				list = Search(list, tmp);
