@@ -15,7 +15,7 @@ int main()
 		if (start)
 		{
 			system("cls");
-			cout << "1 - Начать список;\nESC - Выход;\n";
+			cout << "1 - Начать список;\nESC - Выход;"<<endl;
 			button = _getch();
 			if (button == '1')
 			{
