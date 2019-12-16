@@ -2,14 +2,23 @@
 #include<iostream>
 #include <conio.h>
 
-using namespace std;
-/*
-struct Node
+class BinTree
 {
-	int data;
-	Node* left;
-	Node* right;
-};
+public:
+	BinTree(int);
+	~BinTree();
 
-void Push(int, Node **);
-*/
+	void Push(int);
+	void Print() const;
+
+private:
+
+	struct Node
+	{
+		int value;
+		Node* left;
+		Node* right;
+	};
+
+	Node* node = nullptr;
+};

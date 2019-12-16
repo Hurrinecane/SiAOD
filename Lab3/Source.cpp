@@ -31,7 +31,7 @@ void PrintDepPCs(const Department& dep)
 }
 
 int PC = 0;
-void GiveDepPCs(Department& dep, int quantity)
+void GiveDepPCs(Department & dep, int quantity)
 {
 	dep.quantity = quantity;
 	dep.PCs = new int[dep.quantity];
@@ -40,7 +40,7 @@ void GiveDepPCs(Department& dep, int quantity)
 	PC += quantity;
 }
 
-void GiveDepPCs(Department& dep, int quantity, int x)
+void GiveDepPCs(Department & dep, int quantity, int x)
 {
 	dep.quantity = quantity;
 	dep.PCs = new int[dep.quantity];
@@ -49,7 +49,7 @@ void GiveDepPCs(Department& dep, int quantity, int x)
 	PC += quantity - PC + x;
 }
 
-void DelDep(Department& dep)
+void DelDep(Department & dep)
 {
 	delete[] dep.PCs;
 }
@@ -71,7 +71,7 @@ struct Building
 	Classroom* classrooms = nullptr;
 };
 
-void PrintClassPCs(const Classroom& Class)
+void PrintClassPCs(const Classroom & Class)
 {
 	cout << Class.data << ":\t";
 	for (int i = 0; i < Class.quantity; i++)
@@ -79,7 +79,7 @@ void PrintClassPCs(const Classroom& Class)
 	cout << endl;
 }
 
-void SetClassPCs(Classroom& Class, int quantity)
+void SetClassPCs(Classroom & Class, int quantity)
 {
 	static int PC = 0;
 	Class.quantity = quantity;
@@ -89,14 +89,14 @@ void SetClassPCs(Classroom& Class, int quantity)
 	PC += quantity;
 }
 
-void DelClass(Classroom& Class)
+void DelClass(Classroom & Class)
 {
 	delete[] Class.PCs;
 }
 #pragma endregion
 
 
-void Show(const Building& build, int x)
+void Show(const Building & build, int x)
 {
 	do
 	{
@@ -200,7 +200,7 @@ int main()
 									cout << buildings[b_].classrooms[c].data << " Принадлежит 2-м кафедрам" << endl;
 									break;
 								}
-						
+
 
 	system("pause");
 

@@ -1,81 +1,178 @@
 #pragma once
-#include "Tree.h"
 
-class Tree
+#include <iostream>
+using namespace std;
+
+struct Node
 {
-public:
-	Tree(int);
-
-	void Push(int);
-
-	//Tree(const Tree&);
-	//void operator = (int);
-
-private:
-	int data;
-	Tree* left;
-	Tree* right;
+	int value;
+	Node* left;
+	Node* right;
 };
 
-
-Tree::Tree(int x)
+#pragma region Push
+void Init(Node*& node, int new_number)
 {
-	data = x;
-	left = nullptr;
-	right = nullptr;
+	if (node != nullptr) return;
+	node = new Node;
+
+	node->value = new_number;
+	node->left = nullptr;
+	node->right = nullptr;
 }
 
-/*
-void Tree::Push(int x)
+void Push(Node*& tree, int new_number)
 {
-	while (this != nullptr)
+	if (tree == nullptr)
 	{
-		if (x > data)
-			*this = *this->right;
-		else
-			*this = *this->left;
-	}
-	this = &Tree(x);
-}
-*/
-
-/*
-void Tree::Push(int x)
-{
-	if (this == nullptr)
-	{
-		Tree this(x);
+		Init(tree, new_number);
 		return;
 	}
-	if (x > data)
-		right->Push(x);
-	else
-		left->Push(x);
-}
-*/
+	Node* tmp = tree;
+	do
+	{
+		if (new_number > tmp->value)
+		{
+			if (tmp->right == nullptr)
+			{
+				Init(tmp->right, new_number);
+				return;
+			}
+			tmp = tmp->right;
+		}
+		else
+		{
+			if (tmp->left == nullptr)
+			{
+				Init(tmp->left, new_number);
+				return;
+			}
+			tmp = tmp->left;
+		}
+	} while (true);
 
-void Tree::Push(int x)
+}
+#pragma endregion
+
+#pragma region Print
+void Print(Node* tree, int u)
 {
-	if (x > data)
-	{
-		if (right == nullptr)
-		{
-			static Tree tmp(x);
-			right = &tmp;
-			this;
-			return;
-		}
-		right->Push(x);
-	}
+	if (tree == nullptr) return;
 	else
 	{
-		if (left == nullptr)
-		{
-			static Tree tmp(x);
-			left = &tmp;
-			this;
-			return;
-		}
-		left->Push(x);
+		Print(tree->left, ++u);
+		for (int i = 0; i < u; ++i) cout << "|";
+		cout << tree->value << endl;
+		u--;
 	}
+	Print(tree->right, ++u);
+}
+
+void Print(Node* tree)
+{
+	int u = 0;
+	if (tree == nullptr) return;
+	else
+	{
+		Print(tree->left, ++u);
+		for (int i = 0; i < u; ++i) cout << "|";
+		cout << tree->value << endl;
+		u--;
+	}
+	Print(tree->right, ++u);
+}
+
+void PrintMax(Node* tree)
+{
+	if (tree != nullptr)
+	{
+		while (tree->right != nullptr)
+			tree = tree->right;
+		printf_s("Максимальный элемент: %d\n", tree->value);
+	}
+}
+#pragma endregion
+
+#pragma region Delete
+void DeleteTree(Node* tree, Node*& root)
+{
+	if (tree != nullptr)
+		if (tree->left == nullptr && tree->right == nullptr)
+			return;
+		else
+		{
+			if (tree->left != 0)
+			{
+				DeleteTree(tree->left, root);
+				delete tree->left;
+				tree->left = nullptr;
+				system("cls");
+				Print(root);
+			}
+			if (tree->right != 0)
+			{
+				DeleteTree(tree->right, root);
+				delete tree->right;
+				tree->right = nullptr;
+				system("cls");
+				Print(root);
+			}
+		}
+	system("pause");
+}
+
+void DeleteTree(Node* tree)
+{
+	Node* root = tree;
+	if (tree != nullptr)
+		if (tree->left == nullptr && tree->right == nullptr)
+			return;
+		else
+		{
+			if (tree->left != 0)
+			{
+				DeleteTree(tree->left, root);
+				delete tree->left;
+				tree->left = nullptr;
+				system("cls");
+				Print(root);
+			}
+			if (tree->right != 0)
+			{
+				DeleteTree(tree->right, root);
+				delete tree->right;
+				tree->right = nullptr;
+				system("cls");
+				Print(root);
+			}
+		}
+	delete root;
+	root = nullptr;
+	system("cls");
+}
+
+#pragma endregion
+
+int main()
+{
+	setlocale(LC_ALL, "");
+
+	Node* T = nullptr;
+
+	Push(T, 5);
+	Push(T, 6);
+	Push(T, 4);
+	Push(T, 3);
+	Push(T, 5);
+	Push(T, 6);
+	Push(T, 7);
+	Push(T, 8);
+	Push(T, 3);
+	Push(T, -1);
+
+	Print(T);
+	PrintMax(T);
+	system("pause");
+	DeleteTree(T);
+	system("pause");
 }
