@@ -24,33 +24,32 @@ void Init(Node*& node, int new_number)
 void Push(Node*& tree, int new_number)
 {
 	if (tree == nullptr)
-
-		Init(tree, new_number);
-	else
 	{
-		Node* tmp = tree;
-		do
-		{
-			if (new_number > tmp->value)
-			{
-				if (tmp->right == nullptr)
-				{
-					Init(tmp->right, new_number);
-					return;
-				}
-				tmp = tmp->right;
-			}
-			else
-			{
-				if (tmp->left == nullptr)
-				{
-					Init(tmp->left, new_number);
-					return;
-				}
-				tmp = tmp->left;
-			}
-		} while (true);
+		Init(tree, new_number);
+		return;
 	}
+	Node* tmp = tree;
+	do
+	{
+		if (new_number > tmp->value)
+		{
+			if (tmp->right == nullptr)
+			{
+				Init(tmp->right, new_number);
+				return;
+			}
+			tmp = tmp->right;
+		}
+		else
+		{
+			if (tmp->left == nullptr)
+			{
+				Init(tmp->left, new_number);
+				return;
+			}
+			tmp = tmp->left;
+		}
+	} while (true);
 
 }
 #pragma endregion
@@ -176,5 +175,4 @@ int main()
 	system("pause");
 	DeleteTree(T);
 	system("pause");
-	return 0;
 }
