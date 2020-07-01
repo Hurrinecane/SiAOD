@@ -1,8 +1,16 @@
 #include<iostream>
 #include <ctime>
+#include <stdlib.h>
+
 using std::cout;
 using std::endl;
 using std::cin;
+
+
+int comp1(const void* a, const void* b)
+{
+	return (*(int*)a - *(int*)b);
+}
 
 int main()
 {
@@ -14,7 +22,13 @@ int main()
 
 	for (int i = 0; i < masLen; i++)
 	{
-		mas[i] = rand() % 40;
+		mas[i] = rand() % 1000;
+	}
+
+	qsort(mas, masLen, sizeof(int), comp1);
+
+	for (int i = 0; i < masLen; i++)
+	{
 		cout << mas[i] << " ";
 	}
 	cout << endl;
@@ -23,48 +37,42 @@ int main()
 
 	cout << "Искомое число: ";
 	cin >> key;
-	cout << endl;
+	cout << endl << endl;
+
+
 	//линейный поиск
+
+	int counter = 0;
 	int position = -1;
+
 	for (int i = 0; i < masLen; i++)
 	{
+		counter++;
 		if (mas[i] == key)
 		{
 			position = i;
 			break;
 		}
 	}
+
+	cout << "Линейный поиск" << endl;
+
 	switch (position)
 	{
 	case -1:
 		cout << "Число " << key << " не найдено" << endl;
 		break;
 	default:
-		cout << "Число " << key << " стоит на " << position + 1 << " позиции" << endl;
+		cout << "Число " << key << " стоит на " << position + 1 << " позиции" << endl << "Колличество итераций: " << counter << endl;
 		break;
 	}
+	cout << endl;
 
+	counter = 0;
 	position = -1;
-	//for (int i = 0; i < masLen; i++)
-	//{
-	//	mas[i] = i + 1;
-	//	cout << mas[i] << " ";
-	//}
-	//cout << endl;
 
-	int mas1[masLen] = { 1,2,3,4,5,12,15,18,20,25,31,32,33,35,37,40,47,48,50,55,56,58,60,70,71,73,75,79,80,84,86,89,90,101,115,118,120,125,126,130 };
-
-	for (int i = 0; i < masLen; i++)
-	{
-		cout << mas1[i] << " ";
-	}
-	cout << endl;
-
-	cout << "Искомое число: ";
-	cin >> key;
-	cout << endl;
 	//бинарный поиск
-	int counter = 0;
+
 	int mid, right = masLen, left = 0;
 
 	do
@@ -72,14 +80,16 @@ int main()
 		counter++;
 		mid = (left + right) / 2;
 
-		if (mas1[mid] == key)
+		if (mas[mid] == key)
 		{
 			position = mid;
 			break;
 		}
-		if (mas1[mid] > key) right = mid - 1;
+		if (mas[mid] > key) right = mid - 1;
 		else left = mid + 1;
 	} while (left <= right);
+
+	cout << "Бинарный поиск" << endl;
 
 	switch (position)
 	{
@@ -87,31 +97,33 @@ int main()
 		cout << "Число " << key << " не найдено" << endl;
 		break;
 	default:
-		cout << "Число " << key << " стоит на " << position + 1 << " позиции" << endl << "Поиск занял " << counter << " итераций/и/ю" << endl;
+		cout << "Число " << key << " стоит на " << position + 1 << " позиции" << endl << "Колличество итераций: " << counter << endl;
 		break;
 	}
 
+	cout << endl;
 	position = -1;
 	counter = 0;
-	cout << "Искомое число: ";
-	cin >> key;
-	cout << endl;
+
+	//Интерполяционный поиск
 
 	left = 0;
 	right = masLen - 1;
-	while (mas1[left] <= key && mas1[right] >= key)
+	while (mas[left] <= key && mas[right] >= key)
 	{
 		counter++;
-		mid = left + ((key - mas1[left]) * (right - left)) / (mas1[right] - mas1[left]);
-		if (mas1[mid] < key) left = mid + 1;
-		else if (mas1[mid] > key) right = mid - 1;
+		mid = left + ((key - mas[left]) * (right - left)) / (mas[right] - mas[left]);
+		if (mas[mid] < key) left = mid + 1;
+		else if (mas[mid] > key) right = mid - 1;
 		else
 		{
 			position = mid;
 			break;
 		}
 	}
-	if (mas1[left] == key) position = left;
+	if (mas[left] == key) position = left;
+
+	cout << "Интерполяционный поиск" << endl;
 
 	switch (position)
 	{
@@ -119,7 +131,7 @@ int main()
 		cout << "Число " << key << " не найдено" << endl;
 		break;
 	default:
-		cout << "Число " << key << " стоит на " << position + 1 << " позиции" << endl << "Поиск занял " << counter << " итераций/и/ю" << endl;;
+		cout << "Число " << key << " стоит на " << position + 1 << " позиции" << endl << "Колличество итераций: " << counter << endl;;
 		break;
 	}
 	system("pause");
